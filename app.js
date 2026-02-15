@@ -18,42 +18,32 @@ export default {
     }
 
     try {
-      const body = await request.json();
-      const { type, value } = body;
-
+      const { type, value } = await request.json();
       let reversed;
 
-      if (type === "string") {
+      if (type === "string")
         reversed = value.split("").reverse().join("");
-      } 
-      else if (type === "array") {
+      else if (type === "array")
         reversed = value.reverse();
-      } 
-      else if (type === "words") {
+      else if (type === "words")
         reversed = value.split(" ").reverse().join(" ");
-      } 
-      else if (type === "number") {
+      else if (type === "number")
         reversed = parseInt(String(value).split("").reverse().join(""));
-      } 
-      else {
+      else
         return new Response("Invalid type", { status: 400 });
-      }
 
-      return new Response(
-        JSON.stringify({
-          reversed,
-          email: "23f3001039@ds.study.iitm.ac.in"
-        }),
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*"
-          }
+      return new Response(JSON.stringify({
+        reversed,
+        email: "23f3001039@ds.study.iitm.ac.in"
+      }), {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
         }
-      );
+      });
 
     } catch {
       return new Response("Bad Request", { status: 400 });
     }
   }
-};
+}
